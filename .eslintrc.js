@@ -10,11 +10,12 @@ module.exports = {
     "deprecation", // reports usage of deprecated code
   ],
   extends: [
-    "plugin:@typescript-eslint/recommended",
     "airbnb-typescript", // use airbnb ruleset for typescript as base
     "airbnb/hooks", // add lint rules for use of react hooks
+    "plugin:@typescript-eslint/recommended",
     "plugin:jest/recommended", // use recommended jest rules
     "plugin:unicorn/recommended", // use recommended rules of unicorn ruleset
+    "prettier", // eslint-config-prettier Turns off all rules that are unnecessary or might conflict with Prettier.
     "plugin:prettier/recommended", // extend eslint-config-prettier rules
   ],
   parserOptions: {
@@ -30,7 +31,7 @@ module.exports = {
     browser: true,
     jest: true,
   },
-  ignorePatterns: [".cache/**/*", "dist/**/*", ".git/**/*", "node_modules/**/*", ".*.js", "jest.*.js", "jest.*.ts"],
+  ignorePatterns: [".cache/**/*", "dist/**/*", ".git/**/*", "node_modules/**/*", ".*.js", "jest.*.js", "jest.*.ts", "vite.config.ts"],
   rules: {  
     // https://basarat.gitbooks.io/typescript/docs/tips/defaultIsBad.html
     "import/prefer-default-export": "off",
@@ -38,6 +39,11 @@ module.exports = {
     // No jsx extension: https://github.com/facebook/create-react-app/issues/87#issuecomment-234627904
     "react/jsx-filename-extension": "off",
     "react/jsx-key": "warn",
+    // Use function hoisting to improve code readability
+    "@typescript-eslint/no-use-before-define": [
+      "error",
+      { functions: false, classes: true, variables: true },
+    ],
     // Makes no sense to allow type inferrence for expression parameters, but require typing the response
     "@typescript-eslint/explicit-function-return-type": [
       "error",
@@ -45,7 +51,7 @@ module.exports = {
     ],
     "@typescript-eslint/no-use-before-define": [
       "error",
-      { functions: false, classes: true, variables: true, typedefs: true },
+      { functions: false, classes: false, variables: false, typedefs: false },
     ],
     // Common abbreviations are known and readable
     "unicorn/prevent-abbreviations": "off",
@@ -53,6 +59,7 @@ module.exports = {
     "@typescript-eslint/no-throw-literal": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
     "consistent-return": "off",
+    "jest/expect-expect": ["error", { assertFunctionNames: ["expect*"] }],
     "react/prop-types": "off",
     "eslint-comments/no-duplicate-disable": "error",
     "eslint-comments/no-unlimited-disable": "error",
@@ -60,7 +67,9 @@ module.exports = {
     "unicorn/filename-case": "off",
     "unicorn/no-reduce": "off",
     "unicorn/no-useless-undefined": "off",
-    "deprecation/deprecation": "warn",
-    "prettier/prettier": ["error", { "singleQuote": true, 'trailingComma': 'all' }],
+    "deprecation/deprecation": "warn", // will report all deprecated code
+    "jsx-a11y/label-has-associated-control": ["error", {
+      assert: "either"
+    }]
   },
 };
