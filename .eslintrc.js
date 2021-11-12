@@ -61,6 +61,8 @@ module.exports = {
     "@typescript-eslint/no-implied-eval": "off",
     "@typescript-eslint/no-throw-literal": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
+    "object-shorthand": ["error", "always"],
+    "prefer-template": "error",
     "consistent-return": "off",
     "jest/expect-expect": ["error", { assertFunctionNames: ["expect*"] }],
     "react/prop-types": "off",
@@ -70,6 +72,7 @@ module.exports = {
     "unicorn/filename-case": "off",
     "unicorn/no-reduce": "off",
     "unicorn/no-useless-undefined": "off",
+    "unicorn/no-null": "off",
     "deprecation/deprecation": "warn", // will report all deprecated code
     "jsx-a11y/label-has-associated-control": ["error", {
       assert: "either"
